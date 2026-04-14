@@ -30,76 +30,140 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+/* ── American Airlines Brand Palette ──────────────────────────────────────
+   Primary Red    #C8102E   (AA Eagle Red)
+   Navy           #0D2340   (AA Midnight Navy)
+   Silver         #97999B   (AA Silver)
+   Light Silver   #D0D3D4
+   White          #FFFFFF
+   Off-white bg   #F5F6F7
+   Blue accent    #00467F   (AA Sky Blue — secondary)
+   Gold accent    #B8960C   (limited use — awards/highlights)
+   ─────────────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --aa-red: #C8102E;
-    --aa-navy: #0D1B2A;
-    --aa-blue: #1B4F9B;
-    --aa-light: #F4F7FB;
-    --aa-border: #DDE3ED;
-    --aa-text: #1A2535;
-    --aa-muted: #6B7A96;
-    --aa-gold: #B8860B;
-    --aa-green: #1A7F4B;
-    --aa-card: #FFFFFF;
-    --aa-sidebar: #F0F4FA;
-    --radius: 12px;
+    --aa-red:       #C8102E;
+    --aa-red-dark:  #9E0B22;
+    --aa-navy:      #0D2340;
+    --aa-blue:      #00467F;
+    --aa-silver:    #97999B;
+    --aa-lt-silver: #D0D3D4;
+    --aa-gold:      #B8960C;
+    --aa-white:     #FFFFFF;
+    --aa-bg:        #F5F6F7;
+    --aa-card:      #FFFFFF;
+    --aa-border:    #D0D3D4;
+    --aa-text:      #1A1A1A;
+    --aa-text-2:    #4A4A4A;
+    --aa-green:     #1E6B3C;
+    --radius:       10px;
+    --shadow-sm:    0 1px 4px rgba(0,0,0,0.08);
+    --shadow-md:    0 3px 12px rgba(0,0,0,0.10);
 }
 
-/* Global */
-.stApp { background: var(--aa-light) !important; }
-section[data-testid="stSidebar"] { background: var(--aa-sidebar) !important; border-right: 1px solid var(--aa-border) !important; }
-.block-container { padding-top: 1.5rem; }
+/* ── Base ── */
+.stApp                          { background: var(--aa-bg) !important; }
+.block-container                { padding-top: 1.2rem; max-width: 1280px; }
+h1,h2,h3                        { font-family: 'Oswald', sans-serif !important; letter-spacing: .5px; color: var(--aa-navy) !important; }
+p,span,div,label,.stMarkdown    { font-family: 'Source Sans 3', sans-serif !important; color: var(--aa-text); }
 
-/* Fonts */
-h1, h2, h3 { font-family: 'Bebas Neue', sans-serif !important; letter-spacing: 1px; color: var(--aa-text) !important; }
-p, span, div, label, .stMarkdown { font-family: 'Inter', sans-serif !important; color: var(--aa-text); }
+/* ── Sidebar ── */
+section[data-testid="stSidebar"] {
+    background: var(--aa-navy) !important;
+    border-right: 3px solid var(--aa-red) !important;
+}
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] div,
+section[data-testid="stSidebar"] .stMarkdown { color: #EAEAEA !important; font-family: 'Source Sans 3', sans-serif !important; }
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 { color: #FFFFFF !important; font-family: 'Oswald', sans-serif !important; }
+section[data-testid="stSidebar"] .stTextInput input,
+section[data-testid="stSidebar"] .stSelectbox > div > div {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    color: white !important;
+    border-radius: 6px !important;
+}
+section[data-testid="stSidebar"] .stButton > button {
+    background: var(--aa-red) !important;
+    color: white !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+section[data-testid="stSidebar"] .stButton > button:hover {
+    background: var(--aa-red-dark) !important;
+    transform: none !important;
+}
+section[data-testid="stSidebar"] hr { border-color: rgba(255,255,255,0.15) !important; }
+[data-testid="stMetric"] {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+[data-testid="stMetricValue"]  { color: white !important; font-family: 'Oswald', sans-serif !important; }
+[data-testid="stMetricLabel"]  { color: var(--aa-lt-silver) !important; }
 
-/* Header banner */
+/* ── Header Banner ── */
 .aa-header {
-    background: linear-gradient(135deg, #C8102E 0%, #8B0B1E 45%, #0D1B2A 100%);
+    background: linear-gradient(100deg, var(--aa-navy) 0%, #143060 60%, #1a3f7a 100%);
     border-radius: var(--radius);
-    padding: 1.5rem 2rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 3px solid #B8860B;
-    box-shadow: 0 4px 20px rgba(200,16,46,0.15);
+    padding: 1.4rem 2rem;
+    margin-bottom: 1.4rem;
+    border-left: 5px solid var(--aa-red);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
 }
-.aa-header h1 { color: white !important; font-size: 2.2rem; margin: 0; }
-.aa-header p { color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; }
+.aa-header::after {
+    content: "✈";
+    position: absolute;
+    right: 2rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    opacity: 0.06;
+    color: white;
+}
+.aa-header h1 { color: white !important; font-size: 2rem; margin: 0; letter-spacing: 1px; }
+.aa-header p  { color: rgba(255,255,255,0.7); margin: 0; font-size: 0.88rem; margin-top: 4px; }
 
-/* Cards */
+/* ── KPI Metric Cards ── */
 .metric-card {
     background: var(--aa-card);
     border: 1px solid var(--aa-border);
     border-top: 3px solid var(--aa-red);
     border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.2rem;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-sm);
+    transition: transform .18s, box-shadow .18s;
 }
-.metric-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(200,16,46,0.12); }
-.metric-card .value { font-size: 2rem; font-weight: 700; color: var(--aa-red); font-family: 'Bebas Neue', sans-serif !important; }
-.metric-card .label { font-size: 0.72rem; color: var(--aa-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.metric-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.metric-card .value { font-size: 1.9rem; font-weight: 700; color: var(--aa-red); font-family: 'Oswald', sans-serif !important; }
+.metric-card .label { font-size: 0.7rem; color: var(--aa-silver); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 3px; }
 
-/* Employee card */
+/* ── Employee Card ── */
 .emp-card {
     background: var(--aa-card);
     border: 1px solid var(--aa-border);
     border-left: 4px solid var(--aa-red);
     border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.4rem;
     margin-bottom: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: var(--shadow-sm);
 }
-.emp-name { font-size: 1.4rem; color: var(--aa-navy) !important; font-family: 'Bebas Neue', sans-serif !important; letter-spacing: 1px; }
-.emp-role { color: var(--aa-gold); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; }
-.emp-dept { color: var(--aa-muted); font-size: 0.8rem; }
+.emp-name { font-size: 1.35rem; color: var(--aa-navy) !important; font-family: 'Oswald', sans-serif !important; letter-spacing: .5px; }
+.emp-role { color: var(--aa-blue); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+.emp-dept { color: var(--aa-silver); font-size: 0.8rem; }
 
-/* Chat */
+/* ── Chat Container ── */
 .chat-container {
-    background: #F8FAFD;
+    background: #FAFBFC;
     border: 1px solid var(--aa-border);
     border-radius: var(--radius);
     padding: 1rem;
@@ -107,159 +171,154 @@ p, span, div, label, .stMarkdown { font-family: 'Inter', sans-serif !important; 
     overflow-y: auto;
 }
 .msg-user {
-    background: linear-gradient(135deg, #1B4F9B, #163f80);
+    background: var(--aa-navy);
     border-radius: 12px 12px 2px 12px;
-    padding: 0.75rem 1rem;
-    margin: 0.5rem 0 0.5rem 3rem;
-    color: white; font-size: 0.88rem;
-    box-shadow: 0 2px 8px rgba(27,79,155,0.2);
+    padding: .7rem 1rem;
+    margin: .5rem 0 .5rem 4rem;
+    color: white;
+    font-size: .87rem;
+    box-shadow: var(--shadow-sm);
 }
 .msg-alex {
     background: white;
     border: 1px solid var(--aa-border);
     border-left: 3px solid var(--aa-red);
     border-radius: 2px 12px 12px 12px;
-    padding: 0.75rem 1rem;
-    margin: 0.5rem 3rem 0.5rem 0;
-    color: var(--aa-text); font-size: 0.88rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding: .7rem 1rem;
+    margin: .5rem 4rem .5rem 0;
+    color: var(--aa-text);
+    font-size: .87rem;
+    box-shadow: var(--shadow-sm);
+    line-height: 1.5;
 }
-.msg-meta { font-size: 0.7rem; color: var(--aa-muted); margin-bottom: 4px; }
+.msg-meta { font-size: .68rem; color: var(--aa-silver); margin-bottom: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; }
 
-/* Pills / Tags */
+/* ── Skill / Gap Pills ── */
 .skill-pill {
     display: inline-block;
-    background: rgba(27, 79, 155, 0.08);
-    border: 1px solid rgba(27, 79, 155, 0.3);
-    color: #1B4F9B;
-    border-radius: 20px;
-    padding: 2px 10px;
-    font-size: 0.72rem;
-    margin: 2px;
-    font-weight: 500;
+    background: rgba(0,70,127,0.08);
+    border: 1px solid rgba(0,70,127,0.3);
+    color: var(--aa-blue);
+    border-radius: 20px; padding: 2px 10px;
+    font-size: .71rem; margin: 2px; font-weight: 500;
 }
 .gap-pill-high {
     display: inline-block;
-    background: rgba(200, 16, 46, 0.08);
-    border: 1px solid rgba(200, 16, 46, 0.35);
-    color: #C8102E;
-    border-radius: 20px;
-    padding: 2px 10px;
-    font-size: 0.72rem;
-    margin: 2px;
-    font-weight: 500;
+    background: rgba(200,16,46,0.07);
+    border: 1px solid rgba(200,16,46,0.3);
+    color: var(--aa-red);
+    border-radius: 20px; padding: 2px 10px;
+    font-size: .71rem; margin: 2px; font-weight: 500;
 }
 .gap-pill-med {
     display: inline-block;
-    background: rgba(184, 134, 11, 0.1);
-    border: 1px solid rgba(184, 134, 11, 0.4);
-    color: #8a6208;
-    border-radius: 20px;
-    padding: 2px 10px;
-    font-size: 0.72rem;
-    margin: 2px;
-    font-weight: 500;
+    background: rgba(184,150,12,0.08);
+    border: 1px solid rgba(184,150,12,0.35);
+    color: #7a6308;
+    border-radius: 20px; padding: 2px 10px;
+    font-size: .71rem; margin: 2px; font-weight: 500;
 }
 
-/* Course card */
+/* ── Course Cards ── */
 .course-card {
     background: var(--aa-card);
     border: 1px solid var(--aa-border);
     border-radius: var(--radius);
-    padding: 1rem 1.25rem;
-    margin-bottom: 0.6rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: .9rem 1.1rem;
+    margin-bottom: .55rem;
+    box-shadow: var(--shadow-sm);
+    transition: border-color .18s, box-shadow .18s;
 }
-.course-card:hover { border-color: var(--aa-red); box-shadow: 0 4px 12px rgba(200,16,46,0.08); }
-.course-title { color: var(--aa-navy); font-weight: 600; font-size: 0.9rem; }
-.course-meta { color: var(--aa-muted); font-size: 0.75rem; margin-top: 4px; }
-.course-free { color: var(--aa-green); font-weight: 600; font-size: 0.75rem; }
-.course-cost { color: var(--aa-gold); font-weight: 600; font-size: 0.75rem; }
+.course-card:hover { border-color: var(--aa-red); box-shadow: 0 3px 10px rgba(200,16,46,0.1); }
+.course-title { color: var(--aa-navy); font-weight: 600; font-size: .9rem; }
+.course-meta  { color: var(--aa-silver); font-size: .74rem; margin-top: 3px; }
+.course-free  { color: var(--aa-green);  font-weight: 700; font-size: .74rem; }
+.course-cost  { color: var(--aa-gold);   font-weight: 700; font-size: .74rem; }
 
-/* Quick action buttons */
+/* ── Buttons (main area) ── */
 .stButton > button {
     background: white !important;
     color: var(--aa-navy) !important;
-    border: 1px solid var(--aa-border) !important;
-    border-radius: 8px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.8rem !important;
-    font-weight: 500 !important;
-    transition: all 0.2s !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+    border: 1.5px solid var(--aa-lt-silver) !important;
+    border-radius: 6px !important;
+    font-family: 'Source Sans 3', sans-serif !important;
+    font-size: .82rem !important;
+    font-weight: 600 !important;
+    transition: all .18s !important;
+    box-shadow: var(--shadow-sm) !important;
 }
 .stButton > button:hover {
     background: var(--aa-red) !important;
     color: white !important;
     border-color: var(--aa-red) !important;
+    box-shadow: 0 3px 10px rgba(200,16,46,0.25) !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(200,16,46,0.2) !important;
 }
 
-/* Section headers */
+/* ── Section Headers ── */
 .section-header {
     border-bottom: 2px solid var(--aa-red);
-    padding-bottom: 0.4rem;
-    margin-bottom: 1rem;
+    padding-bottom: .35rem;
+    margin-bottom: .9rem;
     color: var(--aa-navy) !important;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.35rem;
+    letter-spacing: .5px;
+    font-weight: 600;
 }
 
-/* Alerts */
+/* ── Info Box ── */
 .info-box {
-    background: rgba(27, 79, 155, 0.06);
-    border: 1px solid rgba(27, 79, 155, 0.25);
+    background: rgba(0,70,127,0.05);
+    border: 1px solid rgba(0,70,127,0.2);
+    border-left: 3px solid var(--aa-blue);
     border-radius: 8px;
-    padding: 0.75rem 1rem;
-    color: #1B4F9B;
-    font-size: 0.85rem;
-    margin-bottom: 0.75rem;
+    padding: .75rem 1rem;
+    color: var(--aa-blue);
+    font-size: .85rem;
+    margin-bottom: .75rem;
+    line-height: 1.55;
 }
 
-/* Sidebar labels */
-.sidebar-label {
-    color: var(--aa-muted);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 4px;
+/* ── Main area inputs ── */
+.stTextInput > div > div > input,
+.stTextArea textarea,
+.stSelectbox > div > div {
+    background: white !important;
+    border: 1.5px solid var(--aa-lt-silver) !important;
+    color: var(--aa-text) !important;
+    border-radius: 6px !important;
+    font-family: 'Source Sans 3', sans-serif !important;
+}
+.stTextInput > div > div > input:focus,
+.stTextArea textarea:focus {
+    border-color: var(--aa-blue) !important;
+    box-shadow: 0 0 0 2px rgba(0,70,127,0.12) !important;
 }
 
-/* Plotly chart background */
-.js-plotly-plot { border-radius: var(--radius); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+/* ── Tab bar ── */
+.stTabs [data-baseweb="tab-list"] {
+    background: white;
+    border-bottom: 2px solid var(--aa-lt-silver);
+    gap: 0;
+}
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Source Sans 3', sans-serif !important;
+    font-weight: 600;
+    color: var(--aa-silver) !important;
+    padding: .6rem 1.2rem;
+    border-bottom: 3px solid transparent;
+}
+.stTabs [aria-selected="true"] {
+    color: var(--aa-navy) !important;
+    border-bottom: 3px solid var(--aa-red) !important;
+    background: transparent !important;
+}
 
-/* Hide streamlit branding */
-#MainMenu, footer { visibility: hidden; }
+/* ── Misc ── */
+.js-plotly-plot          { border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+#MainMenu, footer        { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
-
-/* Input styling */
-.stTextInput > div > div > input {
-    background: white !important;
-    border: 1px solid var(--aa-border) !important;
-    color: var(--aa-text) !important;
-    border-radius: 8px !important;
-}
-.stTextArea textarea {
-    background: white !important;
-    border: 1px solid var(--aa-border) !important;
-    color: var(--aa-text) !important;
-    border-radius: 8px !important;
-}
-
-/* Sidebar text overrides */
-section[data-testid="stSidebar"] p,
-section[data-testid="stSidebar"] span,
-section[data-testid="stSidebar"] label,
-section[data-testid="stSidebar"] div { color: var(--aa-text) !important; }
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3 { color: var(--aa-navy) !important; }
-
-/* Streamlit metric widget */
-[data-testid="stMetric"] { background: white; border-radius: 8px; padding: 0.5rem; border: 1px solid var(--aa-border); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -302,9 +361,12 @@ with st.sidebar:
     )
 
     model_choice = st.selectbox(
-        "LLaMA Model",
-        options=["llama-3.2-3b", "llama-3.1-8b", "llama-3-8b"],
-        help="3B is fastest & free-tier friendly. 8B gives better results.",
+        "Model",
+        options=["llama-3.2-3b", "llama-3.1-8b", "llama-3.3-70b", "qwen-2.5-7b", "mistral-7b"],
+        help=(
+            "LLaMA models require gated HF access (huggingface.co/meta-llama). "
+            "Qwen-2.5-7B and Mistral-7B work immediately with any HF token — no gate needed."
+        ),
     )
 
     if hf_token and st.button("🔌 Initialize Agent", use_container_width=True):
@@ -352,10 +414,10 @@ with st.sidebar:
         if not match.empty:
             row = match.iloc[0]
             st.markdown(f"""
-            <div style="background:#EBF0FA; border:1px solid #C8D6ED; border-radius:8px; padding:0.6rem 0.8rem; margin:0.4rem 0; font-size:0.8rem;">
-                <strong style="color:#0D1B2A;">{row['employee_id']}</strong><br>
-                <span style="color:#1B4F9B;">{row['job_title']}</span><br>
-                <span style="color:#6B7A96;">{row['department']}</span>
+            <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:0.6rem 0.8rem; margin:0.4rem 0; font-size:0.8rem;">
+                <strong style="color:#0D2340;">{row['employee_id']}</strong><br>
+                <span style="color:#00467F;">{row['job_title']}</span><br>
+                <span style="color:#97999B;">{row['department']}</span>
             </div>
             """, unsafe_allow_html=True)
         else:
@@ -426,8 +488,8 @@ with tab1:
         high_gaps = [g for g in gaps if g.get("priority") == "High"]
         gap_html = "".join([f'<span class="gap-pill-high">{g["skill"]}</span>' for g in high_gaps[:5]])
         
-        perf_color = {"Outstanding": "#B8860B", "Exceeds Expectations": "#1A7F4B", 
-                      "Meets Expectations": "#1B4F9B", "Needs Improvement": "#E31837"}.get(emp.get("performance_rating", ""), "#90c4ff")
+        perf_color = {"Outstanding": "#B8960C", "Exceeds Expectations": "#1E6B3C", 
+                      "Meets Expectations": "#00467F", "Needs Improvement": "#C8102E"}.get(emp.get("performance_rating", ""), "#90c4ff")
 
         st.markdown(f"""
         <div class="emp-card">
@@ -441,14 +503,14 @@ with tab1:
                     <span style="background:rgba(0,0,0,0.3); border:1px solid {perf_color}; color:{perf_color}; padding:4px 12px; border-radius:20px; font-size:0.75rem;">
                         {emp['performance_rating']}
                     </span>
-                    <div style="color:#90c4ff; font-size:0.78rem; margin-top:6px;">🎯 {emp['career_goal']}</div>
+                    <div style="color:#00467F; font-size:0.78rem; margin-top:6px;">🎯 {emp['career_goal']}</div>
                 </div>
             </div>
             <div style="margin-top:0.75rem;">
-                <div style="font-size:0.7rem; color:#6B7A96; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Current Skills</div>
+                <div style="font-size:0.7rem; color:#97999B; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Current Skills</div>
                 {skills_html}
             </div>
-            {f'<div style="margin-top:0.5rem;"><div style="font-size:0.7rem; color:#6B7A96; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">High-Priority Gaps</div>{gap_html}</div>' if gap_html else ''}
+            {f'<div style="margin-top:0.5rem;"><div style="font-size:0.7rem; color:#97999B; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">High-Priority Gaps</div>{gap_html}</div>' if gap_html else ''}
         </div>
         """, unsafe_allow_html=True)
 
@@ -477,7 +539,7 @@ with tab1:
     
     chat_html = '<div class="chat-container">'
     if not st.session_state.messages:
-        chat_html += '<div style="color:#4a6080; text-align:center; padding:2rem;">Load an employee profile and start chatting with Alex 👋</div>'
+        chat_html += '<div style="color:#97999B; text-align:center; padding:2rem;">Load an employee profile and start chatting with Alex 👋</div>'
     else:
         for msg in st.session_state.messages:
             if msg["role"] == "user":
@@ -572,14 +634,14 @@ with tab2:
         fig = px.bar(
             dept_hours, x="learning_hours_ytd", y="department", orientation="h",
             title="Avg Learning Hours YTD by Department",
-            color="learning_hours_ytd", color_continuous_scale=["#1B4F9B", "#E31837"],
+            color="learning_hours_ytd", color_continuous_scale=["#00467F", "#C8102E"],
             labels={"learning_hours_ytd": "Hours", "department": ""},
         )
         fig.update_layout(
             plot_bgcolor="white", paper_bgcolor="white",
             font_color="#1A2535", showlegend=False,
             coloraxis_showscale=False,
-            title_font=dict(size=14, color="#C8102E"),
+            title_font=dict(size=14, color="#0D2340"),
             height=320,
         )
         fig.update_xaxes(gridcolor="#DDE3ED", color="#6B7A96")
@@ -589,8 +651,8 @@ with tab2:
     with col_right:
         perf_counts = employees_df["performance_rating"].value_counts().reset_index()
         perf_counts.columns = ["rating", "count"]
-        colors = {"Outstanding": "#B8860B", "Exceeds Expectations": "#1A7F4B",
-                  "Meets Expectations": "#1B4F9B", "Needs Improvement": "#C8102E"}
+        colors = {"Outstanding": "#B8960C", "Exceeds Expectations": "#1E6B3C",
+                  "Meets Expectations": "#00467F", "Needs Improvement": "#C8102E"}
         fig2 = px.pie(
             perf_counts, values="count", names="rating",
             title="Performance Rating Distribution",
@@ -600,7 +662,7 @@ with tab2:
         )
         fig2.update_layout(
             plot_bgcolor="white", paper_bgcolor="white",
-            font_color="#1A2535", title_font=dict(size=14, color="#C8102E"),
+            font_color="#1A2535", title_font=dict(size=14, color="#0D2340"),
             legend=dict(font=dict(color="#1A2535", size=11)),
             height=320,
         )
@@ -615,12 +677,12 @@ with tab2:
         fig3 = px.bar(
             gap_summary, x="department", y="count", color="priority",
             title="Skill Gaps by Department & Priority",
-            color_discrete_map={"High": "#C8102E", "Medium": "#B8860B", "Low": "#1B4F9B"},
+            color_discrete_map={"High": "#C8102E", "Medium": "#B8860B", "Low": "#00467F"},
             barmode="stack",
         )
         fig3.update_layout(
             plot_bgcolor="white", paper_bgcolor="white",
-            font_color="#1A2535", title_font=dict(size=14, color="#C8102E"),
+            font_color="#1A2535", title_font=dict(size=14, color="#0D2340"),
             legend=dict(font=dict(color="#1A2535", size=11)),
             height=340, xaxis_tickangle=-35,
         )
@@ -635,13 +697,13 @@ with tab2:
         fig4 = px.bar(
             course_pop, x="enrollments", y="course", orientation="h",
             title="Top 8 Most Popular Courses",
-            color="enrollments", color_continuous_scale=["#1B4F9B", "#C8102E"],
+            color="enrollments", color_continuous_scale=["#00467F", "#C8102E"],
         )
         fig4.update_layout(
             plot_bgcolor="white", paper_bgcolor="white",
             font_color="#1A2535", showlegend=False,
             coloraxis_showscale=False,
-            title_font=dict(size=14, color="#C8102E"), height=340,
+            title_font=dict(size=14, color="#0D2340"), height=340,
         )
         fig4.update_xaxes(gridcolor="#DDE3ED", color="#6B7A96")
         fig4.update_yaxes(color="#1A2535")
@@ -653,13 +715,13 @@ with tab2:
         perf_learn, x="performance_rating", y="learning_hours_ytd",
         title="Avg Learning Hours by Performance Rating — Correlation Analysis",
         color="performance_rating",
-        color_discrete_map={"Outstanding": "#B8860B", "Exceeds Expectations": "#1A7F4B",
-                            "Meets Expectations": "#1B4F9B", "Needs Improvement": "#C8102E"},
+        color_discrete_map={"Outstanding": "#B8960C", "Exceeds Expectations": "#1E6B3C",
+                            "Meets Expectations": "#00467F", "Needs Improvement": "#C8102E"},
     )
     fig5.update_layout(
         plot_bgcolor="white", paper_bgcolor="white",
         font_color="#1A2535", showlegend=False,
-        title_font=dict(size=14, color="#C8102E"), height=280,
+        title_font=dict(size=14, color="#0D2340"), height=280,
     )
     fig5.update_xaxes(gridcolor="#DDE3ED", color="#6B7A96")
     fig5.update_yaxes(gridcolor="#DDE3ED", color="#6B7A96", title="Avg Hours")
@@ -694,7 +756,7 @@ with tab3:
 
     st.markdown(f"**{len(filtered)} courses** matching your filters")
 
-    level_colors = {"Foundational": "#1A7F4B", "Intermediate": "#1B4F9B", "Advanced": "#E31837"}
+    level_colors = {"Foundational": "#1A7F4B", "Intermediate": "#00467F", "Advanced": "#C8102E"}
 
     for _, course in filtered.iterrows():
         lc = level_colors.get(course["level"], "#8096b0")
@@ -781,12 +843,12 @@ with tab5:
     fig_heat = px.imshow(
         pivot,
         title="Skill Gap Heatmap: Departments × Top 15 Skills",
-        color_continuous_scale=["#EBF0FA", "#1B4F9B", "#C8102E"],
+        color_continuous_scale=["#EBF0FA", "#00467F", "#C8102E"],
         aspect="auto",
     )
     fig_heat.update_layout(
         plot_bgcolor="white", paper_bgcolor="white",
-        font_color="#1A2535", title_font=dict(size=14, color="#C8102E"),
+        font_color="#1A2535", title_font=dict(size=14, color="#0D2340"),
         height=420,
         xaxis=dict(tickangle=-40, color="#6B7A96", gridcolor="#DDE3ED"),
         yaxis=dict(color="#1A2535", gridcolor="#DDE3ED"),

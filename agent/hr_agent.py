@@ -18,17 +18,26 @@ from data.synthetic_data import get_dataframes, COURSES, SKILLS
 class LlamaClient:
     """Wrapper around HuggingFace Inference API for LLaMA models."""
 
-    # Available free LLaMA models on HuggingFace
+    # HuggingFace Serverless Inference models
+    # Note: LLaMA models require gated access at huggingface.co/meta-llama
+    # Qwen/Mistral are open — no gate required
     MODELS = {
-        "llama-3.2-3b": "meta-llama/Llama-3.2-3B-Instruct",
-        "llama-3.1-8b": "meta-llama/Meta-Llama-3.1-8B-Instruct",
-        "llama-3-8b": "meta-llama/Meta-Llama-3-8B-Instruct",
+        "llama-3.2-3b":  "meta-llama/Llama-3.2-3B-Instruct",
+        "llama-3.1-8b":  "meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "llama-3.3-70b": "meta-llama/Llama-3.3-70B-Instruct",
+        "qwen-2.5-7b":   "Qwen/Qwen2.5-7B-Instruct",
+        "mistral-7b":    "mistralai/Mistral-7B-Instruct-v0.3",
     }
 
     def __init__(self, hf_token: str, model_key: str = "llama-3.2-3b"):
         self.token = hf_token
+        self.model_key = model_key
         self.model_id = self.MODELS.get(model_key, self.MODELS["llama-3.2-3b"])
-        self.api_url = f"https://api-inference.huggingface.co/models/{self.model_id}/v1/chat/completions"
+        # HF migrated from api-inference.huggingface.co to router.huggingface.co (2025)
+        self.api_url = (
+            f"https://router.huggingface.co/hf-inference/models/"
+            f"{self.model_id}/v1/chat/completions"
+        )
         self.headers = {
             "Authorization": f"Bearer {hf_token}",
             "Content-Type": "application/json",
@@ -64,8 +73,16 @@ class LlamaClient:
                 return "❌ **Authentication Error**: Invalid HuggingFace token. Please check your token and ensure it has access to LLaMA models."
             elif response.status_code == 403:
                 return "❌ **Access Denied**: You need to request access to the LLaMA model at huggingface.co/meta-llama."
+            elif response.status_code == 410:
+                return (
+                    "❌ **Endpoint Gone (410)**: The API endpoint has moved. "
+                    "This build uses the new `router.huggingface.co` endpoint. "
+                    "Please ensure you are running the latest version of hr_agent.py."
+                )
             elif response.status_code == 503:
-                return "⏳ **Model Loading**: The model is currently loading. Please wait a moment and try again."
+                return "⏳ **Model Loading**: The model is warming up. Please wait 20 seconds and try again."
+            elif response.status_code == 422:
+                return "❌ **Invalid Request (422)**: The model may not support this request format. Try switching to Qwen-2.5-7B or Mistral-7B in the sidebar."
             else:
                 return f"❌ **API Error** ({response.status_code}): {str(e)}"
         except Exception as e:

@@ -316,27 +316,68 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("### 👤 Employee Lookup")
 
-    # Quick employee picker
     emp_df = data["employees"]
-    sample_ids = emp_df["employee_id"].sample(10).tolist()
-    emp_id_select = st.selectbox("Quick-select Employee", ["— type or pick —"] + sample_ids)
 
-    emp_id_input = st.text_input("Or enter Employee ID", placeholder="AA00042")
+    # Stable sorted list — never re-randomizes on rerun
+    dept_filter_sidebar = st.selectbox(
+        "Filter by Department",
+        ["All Departments"] + sorted(emp_df["department"].unique().tolist()),
+        key="sidebar_dept_filter",
+    )
+    if dept_filter_sidebar != "All Departments":
+        filtered_ids = sorted(emp_df[emp_df["department"] == dept_filter_sidebar]["employee_id"].tolist())
+    else:
+        filtered_ids = sorted(emp_df["employee_id"].tolist())
 
-    final_emp_id = emp_id_input if emp_id_input else (emp_id_select if emp_id_select != "— type or pick —" else "")
+    emp_id_select = st.selectbox(
+        "Select Employee ID",
+        ["— select —"] + filtered_ids,
+        key="sidebar_emp_select",
+    )
 
-    if final_emp_id and st.session_state.agent:
-        if st.button("📂 Load Employee Profile", use_container_width=True):
+    emp_id_input = st.text_input(
+        "Or type Employee ID directly",
+        placeholder="e.g. AA00042",
+        key="sidebar_emp_input",
+    )
+
+    # Text input overrides dropdown
+    final_emp_id = emp_id_input.strip().upper() if emp_id_input.strip() else (
+        emp_id_select if emp_id_select != "— select —" else ""
+    )
+
+    # Preview employee info without needing agent
+    if final_emp_id:
+        match = emp_df[emp_df["employee_id"] == final_emp_id]
+        if not match.empty:
+            row = match.iloc[0]
+            st.markdown(f"""
+            <div style="background:#EBF0FA; border:1px solid #C8D6ED; border-radius:8px; padding:0.6rem 0.8rem; margin:0.4rem 0; font-size:0.8rem;">
+                <strong style="color:#0D1B2A;">{row['employee_id']}</strong><br>
+                <span style="color:#1B4F9B;">{row['job_title']}</span><br>
+                <span style="color:#6B7A96;">{row['department']}</span>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.warning(f"ID {final_emp_id} not found.")
+
+    load_clicked = st.button("📂 Load Employee Profile", use_container_width=True, key="load_emp_btn")
+
+    if load_clicked:
+        if not final_emp_id:
+            st.error("Please select or type an Employee ID first.")
+        elif not st.session_state.agent:
+            st.warning("⚠️ Initialize the AI Agent first (above), then load a profile.")
+        else:
             with st.spinner("Loading profile..."):
                 success, intro = st.session_state.agent.load_employee(final_emp_id)
                 if success:
                     st.session_state.employee_loaded = True
                     st.session_state.messages = [{"role": "assistant", "content": intro}]
-                    st.success(f"Loaded {final_emp_id}")
+                    st.success(f"✅ Loaded {final_emp_id}")
+                    st.rerun()
                 else:
                     st.error(intro)
-    elif final_emp_id and not st.session_state.agent:
-        st.warning("Initialize the agent first.")
 
     st.markdown("---")
     st.markdown("### 🗃️ Data Overview")

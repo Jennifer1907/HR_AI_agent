@@ -33,151 +33,168 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --aa-red: #E31837;
+    --aa-red: #C8102E;
     --aa-navy: #0D1B2A;
     --aa-blue: #1B4F9B;
-    --aa-light: #F7F9FC;
-    --aa-silver: #C8D1DC;
-    --aa-gold: #C9A84C;
+    --aa-light: #F4F7FB;
+    --aa-border: #DDE3ED;
+    --aa-text: #1A2535;
+    --aa-muted: #6B7A96;
+    --aa-gold: #B8860B;
     --aa-green: #1A7F4B;
+    --aa-card: #FFFFFF;
+    --aa-sidebar: #F0F4FA;
     --radius: 12px;
 }
 
 /* Global */
-.stApp { background: var(--aa-navy); }
-section[data-testid="stSidebar"] { background: #080F1A !important; border-right: 1px solid #1e2d40; }
+.stApp { background: var(--aa-light) !important; }
+section[data-testid="stSidebar"] { background: var(--aa-sidebar) !important; border-right: 1px solid var(--aa-border) !important; }
 .block-container { padding-top: 1.5rem; }
 
 /* Fonts */
-h1, h2, h3 { font-family: 'Bebas Neue', sans-serif !important; letter-spacing: 1px; }
-p, span, div, label, .stMarkdown { font-family: 'Inter', sans-serif !important; }
+h1, h2, h3 { font-family: 'Bebas Neue', sans-serif !important; letter-spacing: 1px; color: var(--aa-text) !important; }
+p, span, div, label, .stMarkdown { font-family: 'Inter', sans-serif !important; color: var(--aa-text); }
 
 /* Header banner */
 .aa-header {
-    background: linear-gradient(135deg, #E31837 0%, #8B0F23 50%, #0D1B2A 100%);
+    background: linear-gradient(135deg, #C8102E 0%, #8B0B1E 45%, #0D1B2A 100%);
     border-radius: var(--radius);
     padding: 1.5rem 2rem;
     margin-bottom: 1.5rem;
-    border-bottom: 3px solid var(--aa-gold);
-    display: flex; align-items: center; gap: 1rem;
+    border-bottom: 3px solid #B8860B;
+    box-shadow: 0 4px 20px rgba(200,16,46,0.15);
 }
-.aa-header h1 { color: white; font-size: 2.2rem; margin: 0; }
-.aa-header p { color: rgba(255,255,255,0.75); margin: 0; font-size: 0.9rem; }
+.aa-header h1 { color: white !important; font-size: 2.2rem; margin: 0; }
+.aa-header p { color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; }
 
 /* Cards */
 .metric-card {
-    background: linear-gradient(135deg, #0f1e30 0%, #152840 100%);
-    border: 1px solid #1e3450;
+    background: var(--aa-card);
+    border: 1px solid var(--aa-border);
+    border-top: 3px solid var(--aa-red);
     border-radius: var(--radius);
     padding: 1.25rem 1.5rem;
     text-align: center;
-    transition: transform 0.2s, border-color 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
-.metric-card:hover { transform: translateY(-2px); border-color: var(--aa-red); }
-.metric-card .value { font-size: 2rem; font-weight: 700; color: var(--aa-gold); font-family: 'Bebas Neue', sans-serif !important; }
-.metric-card .label { font-size: 0.78rem; color: var(--aa-silver); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.metric-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(200,16,46,0.12); }
+.metric-card .value { font-size: 2rem; font-weight: 700; color: var(--aa-red); font-family: 'Bebas Neue', sans-serif !important; }
+.metric-card .label { font-size: 0.72rem; color: var(--aa-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
 /* Employee card */
 .emp-card {
-    background: linear-gradient(135deg, #0f1e30, #152840);
-    border: 1px solid var(--aa-blue);
+    background: var(--aa-card);
+    border: 1px solid var(--aa-border);
     border-left: 4px solid var(--aa-red);
     border-radius: var(--radius);
     padding: 1.25rem 1.5rem;
     margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-.emp-name { font-size: 1.4rem; color: white; font-family: 'Bebas Neue', sans-serif !important; letter-spacing: 1px; }
-.emp-role { color: var(--aa-gold); font-size: 0.85rem; margin-bottom: 0.5rem; }
-.emp-dept { color: var(--aa-silver); font-size: 0.8rem; }
+.emp-name { font-size: 1.4rem; color: var(--aa-navy) !important; font-family: 'Bebas Neue', sans-serif !important; letter-spacing: 1px; }
+.emp-role { color: var(--aa-gold); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; }
+.emp-dept { color: var(--aa-muted); font-size: 0.8rem; }
 
 /* Chat */
 .chat-container {
-    background: #080F1A;
-    border: 1px solid #1e3450;
+    background: #F8FAFD;
+    border: 1px solid var(--aa-border);
     border-radius: var(--radius);
     padding: 1rem;
     max-height: 480px;
     overflow-y: auto;
 }
 .msg-user {
-    background: linear-gradient(135deg, #1B4F9B, #0d2f6e);
+    background: linear-gradient(135deg, #1B4F9B, #163f80);
     border-radius: 12px 12px 2px 12px;
     padding: 0.75rem 1rem;
     margin: 0.5rem 0 0.5rem 3rem;
     color: white; font-size: 0.88rem;
+    box-shadow: 0 2px 8px rgba(27,79,155,0.2);
 }
 .msg-alex {
-    background: linear-gradient(135deg, #0f1e30, #152840);
-    border: 1px solid #1e3450;
+    background: white;
+    border: 1px solid var(--aa-border);
     border-left: 3px solid var(--aa-red);
     border-radius: 2px 12px 12px 12px;
     padding: 0.75rem 1rem;
     margin: 0.5rem 3rem 0.5rem 0;
-    color: #e2e8f0; font-size: 0.88rem;
+    color: var(--aa-text); font-size: 0.88rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
-.msg-meta { font-size: 0.7rem; color: var(--aa-silver); margin-bottom: 4px; }
+.msg-meta { font-size: 0.7rem; color: var(--aa-muted); margin-bottom: 4px; }
 
 /* Pills / Tags */
 .skill-pill {
     display: inline-block;
-    background: rgba(27, 79, 155, 0.25);
-    border: 1px solid rgba(27, 79, 155, 0.5);
-    color: #90c4ff;
+    background: rgba(27, 79, 155, 0.08);
+    border: 1px solid rgba(27, 79, 155, 0.3);
+    color: #1B4F9B;
     border-radius: 20px;
     padding: 2px 10px;
     font-size: 0.72rem;
     margin: 2px;
+    font-weight: 500;
 }
 .gap-pill-high {
     display: inline-block;
-    background: rgba(227, 24, 55, 0.2);
-    border: 1px solid rgba(227, 24, 55, 0.5);
-    color: #ff8fa3;
+    background: rgba(200, 16, 46, 0.08);
+    border: 1px solid rgba(200, 16, 46, 0.35);
+    color: #C8102E;
     border-radius: 20px;
     padding: 2px 10px;
     font-size: 0.72rem;
     margin: 2px;
+    font-weight: 500;
 }
 .gap-pill-med {
     display: inline-block;
-    background: rgba(201, 168, 76, 0.2);
-    border: 1px solid rgba(201, 168, 76, 0.5);
-    color: #f0d080;
+    background: rgba(184, 134, 11, 0.1);
+    border: 1px solid rgba(184, 134, 11, 0.4);
+    color: #8a6208;
     border-radius: 20px;
     padding: 2px 10px;
     font-size: 0.72rem;
     margin: 2px;
+    font-weight: 500;
 }
 
 /* Course card */
 .course-card {
-    background: #0f1e30;
-    border: 1px solid #1e3450;
+    background: var(--aa-card);
+    border: 1px solid var(--aa-border);
     border-radius: var(--radius);
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     margin-bottom: 0.6rem;
-    transition: border-color 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
-.course-card:hover { border-color: var(--aa-gold); }
-.course-title { color: white; font-weight: 600; font-size: 0.9rem; }
-.course-meta { color: var(--aa-silver); font-size: 0.75rem; margin-top: 4px; }
+.course-card:hover { border-color: var(--aa-red); box-shadow: 0 4px 12px rgba(200,16,46,0.08); }
+.course-title { color: var(--aa-navy); font-weight: 600; font-size: 0.9rem; }
+.course-meta { color: var(--aa-muted); font-size: 0.75rem; margin-top: 4px; }
 .course-free { color: var(--aa-green); font-weight: 600; font-size: 0.75rem; }
 .course-cost { color: var(--aa-gold); font-weight: 600; font-size: 0.75rem; }
 
 /* Quick action buttons */
 .stButton > button {
-    background: linear-gradient(135deg, #1B4F9B, #0d2f6e) !important;
-    color: white !important;
-    border: 1px solid rgba(27, 79, 155, 0.5) !important;
+    background: white !important;
+    color: var(--aa-navy) !important;
+    border: 1px solid var(--aa-border) !important;
     border-radius: 8px !important;
     font-family: 'Inter', sans-serif !important;
     font-size: 0.8rem !important;
+    font-weight: 500 !important;
     transition: all 0.2s !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
 }
 .stButton > button:hover {
-    background: linear-gradient(135deg, #E31837, #8B0F23) !important;
+    background: var(--aa-red) !important;
+    color: white !important;
     border-color: var(--aa-red) !important;
     transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(200,16,46,0.2) !important;
 }
 
 /* Section headers */
@@ -185,7 +202,7 @@ p, span, div, label, .stMarkdown { font-family: 'Inter', sans-serif !important; 
     border-bottom: 2px solid var(--aa-red);
     padding-bottom: 0.4rem;
     margin-bottom: 1rem;
-    color: white;
+    color: var(--aa-navy) !important;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 1px;
@@ -193,44 +210,56 @@ p, span, div, label, .stMarkdown { font-family: 'Inter', sans-serif !important; 
 
 /* Alerts */
 .info-box {
-    background: rgba(27, 79, 155, 0.15);
-    border: 1px solid rgba(27, 79, 155, 0.4);
+    background: rgba(27, 79, 155, 0.06);
+    border: 1px solid rgba(27, 79, 155, 0.25);
     border-radius: 8px;
     padding: 0.75rem 1rem;
-    color: #90c4ff;
+    color: #1B4F9B;
     font-size: 0.85rem;
     margin-bottom: 0.75rem;
 }
 
 /* Sidebar labels */
 .sidebar-label {
-    color: var(--aa-silver);
+    color: var(--aa-muted);
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 4px;
 }
 
-/* Plotly chart background fix */
-.js-plotly-plot { border-radius: var(--radius); }
+/* Plotly chart background */
+.js-plotly-plot { border-radius: var(--radius); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 
 /* Hide streamlit branding */
 #MainMenu, footer { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 
 /* Input styling */
-.stTextInput > div > div > input, .stSelectbox > div > div > select {
-    background: #0f1e30 !important;
-    border: 1px solid #1e3450 !important;
-    color: white !important;
+.stTextInput > div > div > input {
+    background: white !important;
+    border: 1px solid var(--aa-border) !important;
+    color: var(--aa-text) !important;
     border-radius: 8px !important;
 }
 .stTextArea textarea {
-    background: #0f1e30 !important;
-    border: 1px solid #1e3450 !important;
-    color: white !important;
+    background: white !important;
+    border: 1px solid var(--aa-border) !important;
+    color: var(--aa-text) !important;
     border-radius: 8px !important;
 }
+
+/* Sidebar text overrides */
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] div { color: var(--aa-text) !important; }
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 { color: var(--aa-navy) !important; }
+
+/* Streamlit metric widget */
+[data-testid="stMetric"] { background: white; border-radius: 8px; padding: 0.5rem; border: 1px solid var(--aa-border); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -356,7 +385,7 @@ with tab1:
         high_gaps = [g for g in gaps if g.get("priority") == "High"]
         gap_html = "".join([f'<span class="gap-pill-high">{g["skill"]}</span>' for g in high_gaps[:5]])
         
-        perf_color = {"Outstanding": "#C9A84C", "Exceeds Expectations": "#1A7F4B", 
+        perf_color = {"Outstanding": "#B8860B", "Exceeds Expectations": "#1A7F4B", 
                       "Meets Expectations": "#1B4F9B", "Needs Improvement": "#E31837"}.get(emp.get("performance_rating", ""), "#90c4ff")
 
         st.markdown(f"""
@@ -375,10 +404,10 @@ with tab1:
                 </div>
             </div>
             <div style="margin-top:0.75rem;">
-                <div style="font-size:0.7rem; color:#8096b0; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Current Skills</div>
+                <div style="font-size:0.7rem; color:#6B7A96; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Current Skills</div>
                 {skills_html}
             </div>
-            {f'<div style="margin-top:0.5rem;"><div style="font-size:0.7rem; color:#8096b0; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">High-Priority Gaps</div>{gap_html}</div>' if gap_html else ''}
+            {f'<div style="margin-top:0.5rem;"><div style="font-size:0.7rem; color:#6B7A96; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">High-Priority Gaps</div>{gap_html}</div>' if gap_html else ''}
         </div>
         """, unsafe_allow_html=True)
 
@@ -506,21 +535,21 @@ with tab2:
             labels={"learning_hours_ytd": "Hours", "department": ""},
         )
         fig.update_layout(
-            plot_bgcolor="#0f1e30", paper_bgcolor="#0f1e30",
-            font_color="white", showlegend=False,
+            plot_bgcolor="white", paper_bgcolor="white",
+            font_color="#1A2535", showlegend=False,
             coloraxis_showscale=False,
-            title_font=dict(size=14, color="#C9A84C"),
+            title_font=dict(size=14, color="#C8102E"),
             height=320,
         )
-        fig.update_xaxes(gridcolor="#1e3450", color="#8096b0")
-        fig.update_yaxes(color="#c8d1dc")
+        fig.update_xaxes(gridcolor="#DDE3ED", color="#6B7A96")
+        fig.update_yaxes(color="#1A2535")
         st.plotly_chart(fig, use_container_width=True)
 
     with col_right:
         perf_counts = employees_df["performance_rating"].value_counts().reset_index()
         perf_counts.columns = ["rating", "count"]
-        colors = {"Outstanding": "#C9A84C", "Exceeds Expectations": "#1A7F4B",
-                  "Meets Expectations": "#1B4F9B", "Needs Improvement": "#E31837"}
+        colors = {"Outstanding": "#B8860B", "Exceeds Expectations": "#1A7F4B",
+                  "Meets Expectations": "#1B4F9B", "Needs Improvement": "#C8102E"}
         fig2 = px.pie(
             perf_counts, values="count", names="rating",
             title="Performance Rating Distribution",
@@ -529,9 +558,9 @@ with tab2:
             hole=0.45,
         )
         fig2.update_layout(
-            plot_bgcolor="#0f1e30", paper_bgcolor="#0f1e30",
-            font_color="white", title_font=dict(size=14, color="#C9A84C"),
-            legend=dict(font=dict(color="white", size=11)),
+            plot_bgcolor="white", paper_bgcolor="white",
+            font_color="#1A2535", title_font=dict(size=14, color="#C8102E"),
+            legend=dict(font=dict(color="#1A2535", size=11)),
             height=320,
         )
         st.plotly_chart(fig2, use_container_width=True)
@@ -545,17 +574,17 @@ with tab2:
         fig3 = px.bar(
             gap_summary, x="department", y="count", color="priority",
             title="Skill Gaps by Department & Priority",
-            color_discrete_map={"High": "#E31837", "Medium": "#C9A84C", "Low": "#1B4F9B"},
+            color_discrete_map={"High": "#C8102E", "Medium": "#B8860B", "Low": "#1B4F9B"},
             barmode="stack",
         )
         fig3.update_layout(
-            plot_bgcolor="#0f1e30", paper_bgcolor="#0f1e30",
-            font_color="white", title_font=dict(size=14, color="#C9A84C"),
-            legend=dict(font=dict(color="white", size=11)),
+            plot_bgcolor="white", paper_bgcolor="white",
+            font_color="#1A2535", title_font=dict(size=14, color="#C8102E"),
+            legend=dict(font=dict(color="#1A2535", size=11)),
             height=340, xaxis_tickangle=-35,
         )
-        fig3.update_xaxes(gridcolor="#1e3450", color="#8096b0")
-        fig3.update_yaxes(gridcolor="#1e3450", color="#8096b0")
+        fig3.update_xaxes(gridcolor="#DDE3ED", color="#6B7A96")
+        fig3.update_yaxes(gridcolor="#DDE3ED", color="#6B7A96")
         st.plotly_chart(fig3, use_container_width=True)
 
     with col_right2:
@@ -565,16 +594,16 @@ with tab2:
         fig4 = px.bar(
             course_pop, x="enrollments", y="course", orientation="h",
             title="Top 8 Most Popular Courses",
-            color="enrollments", color_continuous_scale=["#1B4F9B", "#C9A84C"],
+            color="enrollments", color_continuous_scale=["#1B4F9B", "#C8102E"],
         )
         fig4.update_layout(
-            plot_bgcolor="#0f1e30", paper_bgcolor="#0f1e30",
-            font_color="white", showlegend=False,
+            plot_bgcolor="white", paper_bgcolor="white",
+            font_color="#1A2535", showlegend=False,
             coloraxis_showscale=False,
-            title_font=dict(size=14, color="#C9A84C"), height=340,
+            title_font=dict(size=14, color="#C8102E"), height=340,
         )
-        fig4.update_xaxes(gridcolor="#1e3450", color="#8096b0")
-        fig4.update_yaxes(color="#c8d1dc")
+        fig4.update_xaxes(gridcolor="#DDE3ED", color="#6B7A96")
+        fig4.update_yaxes(color="#1A2535")
         st.plotly_chart(fig4, use_container_width=True)
 
     # Row 3: Learning Hours vs Performance
@@ -583,16 +612,16 @@ with tab2:
         perf_learn, x="performance_rating", y="learning_hours_ytd",
         title="Avg Learning Hours by Performance Rating — Correlation Analysis",
         color="performance_rating",
-        color_discrete_map={"Outstanding": "#C9A84C", "Exceeds Expectations": "#1A7F4B",
-                            "Meets Expectations": "#1B4F9B", "Needs Improvement": "#E31837"},
+        color_discrete_map={"Outstanding": "#B8860B", "Exceeds Expectations": "#1A7F4B",
+                            "Meets Expectations": "#1B4F9B", "Needs Improvement": "#C8102E"},
     )
     fig5.update_layout(
-        plot_bgcolor="#0f1e30", paper_bgcolor="#0f1e30",
-        font_color="white", showlegend=False,
-        title_font=dict(size=14, color="#C9A84C"), height=280,
+        plot_bgcolor="white", paper_bgcolor="white",
+        font_color="#1A2535", showlegend=False,
+        title_font=dict(size=14, color="#C8102E"), height=280,
     )
-    fig5.update_xaxes(gridcolor="#1e3450", color="#8096b0")
-    fig5.update_yaxes(gridcolor="#1e3450", color="#8096b0", title="Avg Hours")
+    fig5.update_xaxes(gridcolor="#DDE3ED", color="#6B7A96")
+    fig5.update_yaxes(gridcolor="#DDE3ED", color="#6B7A96", title="Avg Hours")
     st.plotly_chart(fig5, use_container_width=True)
 
 
@@ -711,16 +740,16 @@ with tab5:
     fig_heat = px.imshow(
         pivot,
         title="Skill Gap Heatmap: Departments × Top 15 Skills",
-        color_continuous_scale=["#0f1e30", "#1B4F9B", "#E31837"],
+        color_continuous_scale=["#EBF0FA", "#1B4F9B", "#C8102E"],
         aspect="auto",
     )
     fig_heat.update_layout(
-        plot_bgcolor="#0f1e30", paper_bgcolor="#0f1e30",
-        font_color="white", title_font=dict(size=14, color="#C9A84C"),
+        plot_bgcolor="white", paper_bgcolor="white",
+        font_color="#1A2535", title_font=dict(size=14, color="#C8102E"),
         height=420,
-        xaxis=dict(tickangle=-40, color="#c8d1dc"),
-        yaxis=dict(color="#c8d1dc"),
-        coloraxis_colorbar=dict(tickcolor="white", titlefont=dict(color="white")),
+        xaxis=dict(tickangle=-40, color="#6B7A96", gridcolor="#DDE3ED"),
+        yaxis=dict(color="#1A2535", gridcolor="#DDE3ED"),
+        coloraxis_colorbar=dict(tickcolor="#1A2535", tickfont=dict(color="#1A2535")),
     )
     st.plotly_chart(fig_heat, use_container_width=True)
 
